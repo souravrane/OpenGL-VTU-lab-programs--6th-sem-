@@ -3,25 +3,25 @@
 #include<GL/glut.h>
 #include<math.h>
 
-float v[][3] = { {-1,-1,-1} ,{ -1,1,-1 } ,{ 1,1,-1 } ,{ 1,-1,-1 } ,{ -1,-1,1 } ,{ -1,1,1 } ,{ 1,1,1 } ,{ 1,-1,1 }  };
-int t[] = { 0,0,0 };
-int ax = 2;
+float v[][3] = { { -1,-1,-1 } ,{ -1,1,-1 } ,{ 1,1,-1 } ,{ 1,-1,-1 } ,{ -1,-1,1 } ,{ -1,1,1 } ,{ 1,1,1 } ,{ 1,-1,1 } }; // 8 vertices of the cube with origin as its centroid
+int t[] = { 0,0,0 };  // degree of rotation along {x,y,z} 
+int ax = 2; // axis of rotation
 
 
 void init()
 {
 	glMatrixMode(GL_PROJECTION);
-	glOrtho(-4, 4, -4, 4, -10, 10);
-	glMatrixMode(GL_MODELVIEW);
+	glOrtho(-4, 4, -4, 4, -10, 10); // https://www.khronos.org/registry/OpenGL-Refpages/gl2.1/xhtml/glOrtho.xml (check)
+	glMatrixMode(GL_MODELVIEW);  // location where your object gets modelled
 
 }
 
 
-void polygon(int a, int b, int c, int d)
+void polygon(int a, int b, int c, int d)  // function used to draw one face of a cube at a time 
 {
-	glBegin(GL_POLYGON);
-	glVertex3fv(v[a]);
-	glVertex3fv(v[b]);
+	glBegin(GL_POLYGON);	// draw the square using polygon
+	glVertex3fv(v[a]);		// 4 coordinates of the square face are give.. 
+	glVertex3fv(v[b]);		// each v[i] contains 3 values (x,y,z) which denotes a point in 3D plane
 	glVertex3fv(v[c]);
 	glVertex3fv(v[d]);
 	glEnd();
@@ -29,25 +29,27 @@ void polygon(int a, int b, int c, int d)
 
 
 
-void colorcube()
+void colorcube()		//function used to color each face of the cube seperately 
 {
-	glColor3f(0, 0, 1);
-	polygon(0, 1, 2, 3);	//front plane
+	// 0,1,2,3....8 are the index postions of the 2D matrix v[][] which holds the coordinates of each vertex of the cube
 
-	glColor3f(0, 1, 1);
-	polygon(4, 5, 6, 7);	//left plane
+	glColor3f(0, 0, 1);		//color of front square
+	polygon(0, 1, 2, 3);	// drawing the front square
 
-	glColor3f(0, 1, 0);
-	polygon(0, 1, 5, 4);	//right plane
+	glColor3f(0, 1, 1);		// color of the left square
+	polygon(4, 5, 6, 7);	// drawing the left square
 
-	glColor3f(1, 0, 0);
-	polygon(2, 6, 7, 3);	//top plane
+	glColor3f(0, 1, 0);		// color of the right square
+	polygon(0, 1, 5, 4);	// drawing the right square
 
-	glColor3f(1, 1, 0);
-	polygon(0, 4, 7, 3);	//bottom plane
+	glColor3f(1, 0, 0);		// color of the top square
+	polygon(2, 6, 7, 3);	// drawing the top square
 
-	glColor3f(1, 0, 1);
-	polygon(1, 5, 6, 2);	//back plane
+	glColor3f(1, 1, 0);		// color of the bottom square
+	polygon(0, 4, 7, 3);	// drawing the bottom square
+
+	glColor3f(1, 0, 1);		// color of the back square
+	polygon(1, 5, 6, 2);	// drawing the back square
 
 
 }
@@ -55,40 +57,49 @@ void colorcube()
 
 void spincube()
 {
-	t[ax] += 1;
+	t[ax] += 1;		// rotating the cube by 1 degree at a time on the given axis "ax" ( ax = 0 is x axis , ax =1 is y axis , ax =2 is z axis)
 	if (t[ax] == 360)
-		t[ax] -= 360;
-	glutPostRedisplay();
+		t[ax] -= 360;	// when the rotation along any axis reaches 360 reset the axis to 0
+	glutPostRedisplay();	// calling the display again.. 
 
 }
 
 
-void mouse(int btn, int state, int x, int y)
+void mouse(int btn, int state, int x, int y)  // function is used to capture the events of the mouse and rotate cube accordingly
 {
-	if (btn == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
-		ax = 0;
-	if (btn == GLUT_MIDDLE_BUTTON && state == GLUT_DOWN)
-		ax = 1;
-	if (btn == GLUT_RIGHT_BUTTON && state == GLUT_DOWN)
-		ax = 2;
+	if (btn == GLUT_LEFT_BUTTON && state == GLUT_DOWN)	// on left click, state of the left button is set to DOWN ...and ax =0
+		ax = 0;											//ie rotate along x axis
+
+	if (btn == GLUT_MIDDLE_BUTTON && state == GLUT_DOWN)// on middle click, state of the middle button is set to DOWN .. and ax=1
+		ax = 1;											//ie rotate along y axis
+
+	if (btn == GLUT_RIGHT_BUTTON && state == GLUT_DOWN)// on right click, state of the right button is set to DOWN.. and ax=2
+		ax = 2;											//ie rotate along z axis
 
 }
 
 
 
-void display()
+void display()	// display function
 {
-	glClearColor(1, 1, 1, 1);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //clears the color buffer and depth buffer
+	glClearColor(1, 1, 1, 1);	//sets the backround screen color
 
-	glLoadIdentity();
-	glRotatef(t[0], 1, 0, 0);
-	glRotatef(t[1], 0, 1, 0);
-	glRotatef(t[2], 0, 0, 1);
+	glLoadIdentity();	//loads identity matrix into modelview
 
-	colorcube();
-	glutSwapBuffers();
-	glFlush();	
+						//glrotatef(angle of rotation,x,y,z)
+	glRotatef(t[0], 1, 0, 0);	//rotate cube at an angle of t[0] degrees wrt vector(1,0,0)
+	glRotatef(t[1], 0, 1, 0);	//rotate cube at an angle of t[1] degrees wrt vector(0,1,0)
+	glRotatef(t[2], 0, 0, 1);	//rotate cube at an angle of t[2] degrees wrt vector(0,0,1)
+
+	colorcube();	// call the function to color each square of cube with different colors
+
+	glutSwapBuffers();	/* this program contains 2 buffers .. one buffer stores the current object and the other buffer stores the
+						next view of the object .. in this case lets if buffer 1 stores cube rotated by 5 degree and the buffer 2 stores
+						cube that is rotated by 5 + 1 degree.. swapping of these buffers will make it seem animated such a way that u see
+						cube rotating*/
+
+	glFlush();
 
 }
 
@@ -97,15 +108,18 @@ void main(int argc, char **argv)
 {
 
 	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
-	glutInitWindowPosition(100, 100);
-	glutInitWindowSize(500, 500);
+	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH); // no idea xD
+	glutInitWindowPosition(100, 100); // set window position
+	glutInitWindowSize(500, 500);	//set window size
 	glutCreateWindow("Cube rotation");
 
 	init();
-	glutIdleFunc(spincube);
-	glutMouseFunc(mouse);
-	glEnable(GL_DEPTH_TEST);
+	glutIdleFunc(spincube);	/*idle function helps the spincube function called continuosly ..
+							this is what makes cube rotate even when you are not clicking the
+							mouse buttons */
+
+	glutMouseFunc(mouse);	// calls the mouse function... glutmousefunc captures your mouse activity
+	glEnable(GL_DEPTH_TEST);	//enabling the depth buffer
 	glutDisplayFunc(display);
 	glutMainLoop();
 
