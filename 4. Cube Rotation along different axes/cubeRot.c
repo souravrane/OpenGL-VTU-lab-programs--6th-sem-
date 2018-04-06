@@ -57,7 +57,7 @@ void colorcube()		//function used to color each face of the cube seperately
 
 void spincube()
 {
-	t[ax] += 1;		// rotating the cube by 1 degree at a time on the given axis "ax" ( ax = 0 is x axis , ax =1 is y axis , ax =2 is z axis)
+	t[ax] += 1;	// rotating the cube by 1 degree at a time on the given axis "ax" ( ax = 0 is x axis , ax =1 is y axis , ax =2 is z axis)
 	if (t[ax] == 360)
 		t[ax] -= 360;	// when the rotation along any axis reaches 360 reset the axis to 0
 	glutPostRedisplay();	// calling the display again.. 
@@ -95,9 +95,9 @@ void display()	// display function
 	colorcube();	// call the function to color each square of cube with different colors
 
 	glutSwapBuffers();	/* this program contains 2 buffers .. one buffer stores the current object and the other buffer stores the
-						next view of the object .. in this case lets if buffer 1 stores cube rotated by 5 degree and the buffer 2 stores
-						cube that is rotated by 5 + 1 degree.. swapping of these buffers will make it seem animated such a way that u see
-						cube rotating*/
+				next view of the object .. in this case lets say if buffer 1 stores cube rotated by 5 degree and the buffer 2 stores
+				cube that is rotated by 5 + 1 degree.. swapping of these buffers will make it seem animated such a way that u see
+				cube rotating*/
 
 	glFlush();
 
