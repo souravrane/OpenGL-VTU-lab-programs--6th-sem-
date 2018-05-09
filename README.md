@@ -2,7 +2,8 @@
 compilation commands for linux/unix users
 
 for C :    
-            gcc filename.c -lGL -lGLU -lglut
+           
+           gcc filename.c -lGL -lGLU -lglut
 
                     
 for C++: 
@@ -10,4 +11,6 @@ for C++:
           gcc filename.c -lGL -lGLU -lglut
 
 
-To execute use : ./a.out
+To execute use : 
+
+./a.out
