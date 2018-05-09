@@ -8,7 +8,7 @@ for C :
                     
 for C++: 
           
-          g++ filename.c -lGL -lGLU -lglut
+          g++ filename.cpp -lGL -lGLU -lglut
 
 
 To execute use : 
