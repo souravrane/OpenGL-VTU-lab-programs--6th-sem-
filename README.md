@@ -6,7 +6,8 @@ for C :
 
                     
 for C++: 
-           gcc filename.c -lGL -lGLU -lglut
+          
+          gcc filename.c -lGL -lGLU -lglut
 
 
 To execute use : ./a.out
