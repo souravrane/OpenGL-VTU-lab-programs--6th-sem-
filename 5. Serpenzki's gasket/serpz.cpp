@@ -17,7 +17,7 @@ void triangle(float a[], float b[], float c[])
 
 void divide_triangle(float a[], float b[], float c[], int m)
 {
-	GLfloat v1[3], v2[3], v3[3];
+	float v1[3], v2[3], v3[3];
 	int i;
 	if (m>0)
 	{
