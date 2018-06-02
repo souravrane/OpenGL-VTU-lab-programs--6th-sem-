@@ -1,5 +1,4 @@
-
-#include<stdlib.h>
+#include<bits/stdc++.h>
 #include<GL/glut.h>
 
 using namespace std;
@@ -7,7 +6,7 @@ using namespace std;
 GLfloat v[4][3] = { { 0.0,0.0,1.0 },{ 0,1,-1 },{ -0.8,-0.4,-1 },{ 0.8,-0.4,-1 } };
 int n;
 
-void triangle(GLfloat* a, GLfloat* b, GLfloat* c)
+void triangle(float a[], float b[], float c[])
 {
 	glBegin(GL_POLYGON);
 	glVertex3fv(a);
@@ -16,7 +15,7 @@ void triangle(GLfloat* a, GLfloat* b, GLfloat* c)
 	glEnd();
 }
 
-void divide_triangle(GLfloat* a, GLfloat* b, GLfloat* c, int m)
+void divide_triangle(float a[], float b[], float c[], int m)
 {
 	GLfloat v1[3], v2[3], v3[3];
 	int i;
@@ -44,22 +43,22 @@ void tetrahedron(int m)
 	divide_triangle(v[0], v[2], v[3], m);
 }
 
+
 void display()
 {
+	
+	
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glOrtho(-2.0, 2.0, -2.0, 2.0, -10.0, 10.0);
+	glMatrixMode(GL_MODELVIEW);
+
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	tetrahedron(n);
 	glFlush();
-}
-
-void reshape(int w, int h)
-{
-	glViewport(0, 0, w, h);
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glOrtho(-2.0, 2.0, -2.0*h /w, 2.0*h /w, -10.0, 10.0);
-	glMatrixMode(GL_MODELVIEW);
 	glutPostRedisplay();
 }
+
 
 int main(int argc, char* argv[])
 {
@@ -70,11 +69,10 @@ int main(int argc, char* argv[])
 	glutInitWindowSize(500, 500);
 	glutInitWindowPosition(0, 0);
 	glutCreateWindow("3D Gasket");
-	glutReshapeFunc(reshape);
+	
 	glutDisplayFunc(display);
 	glEnable(GL_DEPTH_TEST);
 	glClearColor(1.0, 1.0, 1.0, 1.0);
 	glutMainLoop();
 	return 0;
 }
-
