@@ -3,7 +3,7 @@
 
 using namespace std;
 
-GLfloat v[4][3] = { { 0.0,0.0,1.0 },{ 0,1,-1 },{ -0.8,-0.4,-1 },{ 0.8,-0.4,-1 } };
+float v[4][3] = { { 0.0,0.0,1.0 },{ 0,1,-1 },{ -0.8,-0.4,-1 },{ 0.8,-0.4,-1 } };
 int n;
 
 void triangle(float a[], float b[], float c[])
