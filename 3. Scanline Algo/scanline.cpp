@@ -1,7 +1,7 @@
 
-#include<stdio.h>
+#include<bits/stdc++.h>
 #include<GL/glut.h>
-#include<math.h>
+
 
 int le[500], re[500], flag=0 ,m;
 
@@ -94,7 +94,7 @@ int le[500], re[500], flag=0 ,m;
 	}
 
 
-	void main(int argc, char **argv)
+int main(int argc, char **argv)
 	{
 		glutInit(&argc, argv);
 		glutInitWindowPosition(100, 100);
@@ -109,6 +109,7 @@ int le[500], re[500], flag=0 ,m;
 		glutAddMenuEntry("exit", 3);
 		glutAttachMenu(GLUT_RIGHT_BUTTON);
 		glutMainLoop();
+		return 0;
 	}
 	
 

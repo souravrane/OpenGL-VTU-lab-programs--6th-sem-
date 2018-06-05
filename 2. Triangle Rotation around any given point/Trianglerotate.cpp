@@ -1,6 +1,6 @@
-#include<stdio.h>
+#include<bits/stdc++.h>
 #include<GL/glut.h>
-#include<math.h>
+
 #define pi 3.1415
 
 float tri[4][4] = { { 150.0,250.0,350.0 } ,{ 250.0,350.0,250.0 },{ 1.0,1.0,1.0 },{ 1.0,1.0,1.0 } };
@@ -82,7 +82,7 @@ void display()
 }
 
 
-void main(int argc, char **argv)
+int main(int argc, char **argv)
 {
 
 	glutInit(&argc, argv);
@@ -94,6 +94,7 @@ void main(int argc, char **argv)
 	Init();
 	glutDisplayFunc(display);
 	glutMainLoop();
+	return 0;
 
 }
 

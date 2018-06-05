@@ -1,4 +1,4 @@
-#include<stdio.h>
+#include<bits/stdc++.h>
 #include<GL/glut.h>
 
 int xmax = 100, ymax = 100, xmin = 50, ymin = 50, x1 = 80, y1 = 120, x0 = 60, y0 = 20, left = 8, right = 2, bottom = 1, top = 4, x, y;
@@ -154,5 +154,5 @@ int main(int argc, char **argv)
 	Init();
 	glutDisplayFunc(display);
 	glutMainLoop();
-
+	return 0;
 }

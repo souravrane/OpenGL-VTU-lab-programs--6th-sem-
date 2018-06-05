@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <bits/stdc++.h>
 #include <GL/glut.h>
 
 GLfloat x = 2.3, y = 1.0;

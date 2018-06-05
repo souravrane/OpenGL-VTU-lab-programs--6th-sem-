@@ -1,7 +1,7 @@
 
-#include<stdio.h>
+#include<bits/stdc++.h>
 #include<GL/glut.h>
-#include<math.h>
+
 
 float v[][3] = { { -1,-1,-1 } ,{ -1,1,-1 } ,{ 1,1,-1 } ,{ 1,-1,-1 } ,{ -1,-1,1 } ,{ -1,1,1 } ,{ 1,1,1 } ,{ 1,-1,1 } }; // 8 vertices of the cube with origin as its centroid
 int t[] = { 0,0,0 };  // degree of rotation along {x,y,z} 
@@ -104,7 +104,7 @@ void display()	// display function
 }
 
 
-void main(int argc, char **argv)
+int main(int argc, char **argv)
 {
 
 	glutInit(&argc, argv);
@@ -122,6 +122,6 @@ void main(int argc, char **argv)
 	glEnable(GL_DEPTH_TEST);	//enabling the depth buffer
 	glutDisplayFunc(display);
 	glutMainLoop();
-
+	return 0;
 }
 
